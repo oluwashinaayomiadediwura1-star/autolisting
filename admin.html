@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#183c31">
+    <title>Inventory manager — AutoList</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+    <section class="login-view" id="login-view" hidden>
+        <div class="login-image" role="img" aria-label="A car ready for its next owner"><span class="login-image-caption">Good cars find their people.</span></div>
+        <div class="login-content">
+            <a class="brand" href="/"><span class="brand-mark">A</span><span>auto<span class="brand-light">list</span></span></a>
+            <div class="login-form-wrap"><p class="eyebrow">YOUR INVENTORY, IN GOOD HANDS</p><h1>Welcome back.</h1><p class="login-copy">Sign in to manage your vehicle listings.</p>
+                <form id="login-form"><label for="password">Admin password</label><input id="password" name="password" type="password" autocomplete="current-password" required><button type="submit">Sign in <span aria-hidden="true">→</span></button><p class="form-error" id="login-error" role="alert"></p></form>
+                <form id="setup-form" hidden><label for="new-password">Create an admin password</label><input id="new-password" name="password" type="password" minlength="8" maxlength="128" autocomplete="new-password" required><label for="confirm-password">Confirm password</label><input id="confirm-password" name="confirm-password" type="password" minlength="8" maxlength="128" autocomplete="new-password" required><small class="setup-hint">Use at least 8 characters. Your password is stored as a secure hash.</small><button type="submit">Secure admin access <span aria-hidden="true">→</span></button><p class="form-error" id="setup-error" role="alert"></p></form>
+            </div>
+            <a class="back-link" href="/">← Back to AutoList</a>
+        </div>
+    </section>
+
+    <div class="admin-app" id="admin-app" hidden>
+        <aside class="sidebar">
+            <a class="brand sidebar-brand" href="/"><span class="brand-mark">A</span><span>auto<span class="brand-light">list</span></span></a>
+            <div class="sidebar-label">WORKSPACE</div>
+            <a class="sidebar-item active" href="#inventory"><span class="sidebar-icon">▦</span>Inventory</a>
+            <a class="sidebar-item" href="/"><span class="sidebar-icon">↗</span>View storefront</a>
+            <div class="sidebar-bottom"><span class="status-dot"></span><span>Inventory is live</span></div>
+        </aside>
+        <main class="admin-main">
+            <header class="topbar"><div class="breadcrumb"><a href="/">AutoList</a><span>/</span><strong>Inventory</strong></div><button id="logout-button" type="button" class="logout-button">Sign out <span aria-hidden="true">↗</span></button></header>
+            <section class="dashboard" id="inventory">
+                <div class="page-heading"><div><p class="eyebrow">VEHICLE MANAGEMENT</p><h1>Your inventory<span>.</span></h1><p class="page-subtitle">Keep your listings up to date. Changes appear on your storefront right away.</p></div><button class="primary-button" id="add-car" type="button"><span aria-hidden="true">+</span> Add a car</button></div>
+                <div class="summary-row"><div class="summary-item"><span>ACTIVE LISTINGS</span><strong id="listing-count">0</strong></div><div class="summary-item"><span>INVENTORY VALUE</span><strong id="inventory-value">$0</strong></div><div class="summary-item"><span>UPDATED</span><strong id="last-updated">Just now</strong></div></div>
+                <section class="inventory-panel" aria-labelledby="inventory-title"><div class="panel-heading"><div><h2 id="inventory-title">All vehicles</h2><p id="inventory-caption">Your live storefront inventory</p></div><label class="table-search"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.3"/><path d="m16 16 4.3 4.3"/></svg><input id="table-search" type="search" placeholder="Search inventory" aria-label="Search inventory"></label></div>
+                    <div class="table-wrap"><table><thead><tr><th>VEHICLE</th><th>PRICE</th><th>MILEAGE</th><th>STATUS</th><th><span class="visually-hidden">Actions</span></th></tr></thead><tbody id="vehicle-rows"></tbody></table><div class="table-empty" id="table-empty" hidden><strong>No cars match that search.</strong><span>Try another make or model.</span></div></div>
+                </section>
+                <p class="dashboard-note"><span class="note-check">✓</span> New listings appear on your public storefront as soon as you save.</p>
+            </section>
+        </main>
+    </div>
+
+    <dialog class="editor-dialog" id="editor-dialog" aria-labelledby="editor-title"><form id="car-form"><header class="dialog-header"><div><p class="eyebrow">STOREFRONT LISTING</p><h2 id="editor-title">Add a car</h2></div><button type="button" id="close-editor" class="close-button" aria-label="Close form">×</button></header>
+        <div class="form-grid">
+            <label class="form-field span-two"><span>Make <i>*</i></span><input name="make" maxlength="50" required placeholder="e.g. Toyota"></label>
+            <label class="form-field"><span>Model <i>*</i></span><input name="model" maxlength="70" required placeholder="e.g. RAV4"></label>
+            <label class="form-field"><span>Year <i>*</i></span><input name="year" type="number" min="1950" max="2099" required placeholder="2024"></label>
+            <label class="form-field"><span>Price <i>*</i></span><input name="price" type="number" min="1" required placeholder="28900"></label>
+            <label class="form-field"><span>Mileage <i>*</i></span><input name="mileage" type="number" min="0" required placeholder="24500"></label>
+            <label class="form-field"><span>Body style <i>*</i></span><select name="body" required><option value="">Select style</option><option>SUV</option><option>Sedan</option><option>Coupe</option><option>Wagon</option><option>Truck</option><option>Hatchback</option><option>Van</option></select></label>
+            <label class="form-field"><span>Fuel type <i>*</i></span><select name="fuel" required><option value="">Select fuel</option><option>Gasoline</option><option>Hybrid</option><option>Plug-in hybrid</option><option>Electric</option><option>Diesel</option></select></label>
+            <label class="form-field span-two"><span>Trim</span><input name="trim" maxlength="100" placeholder="e.g. XLE Premium AWD"></label>
+            <label class="form-field"><span>Location</span><input name="location" maxlength="100" placeholder="Portland, OR"></label>
+            <label class="form-field"><span>Exterior color</span><input name="color" maxlength="50" placeholder="Lunar Rock"></label>
+            <label class="form-field"><span>Listing badge</span><select name="badge"><option>Just listed</option><option>Great price</option><option>Low miles</option></select></label>
+            <label class="form-field span-two"><span>Photo URL <i>*</i></span><input name="image" type="url" required placeholder="https://..." autocomplete="url"><small>Use a direct image link beginning with https://.</small></label>
+            <label class="form-field span-two"><span>Description</span><textarea name="description" rows="4" maxlength="2000" placeholder="What makes this car worth a closer look?"></textarea></label>
+        </div>
+        <p class="form-error editor-error" id="editor-error" role="alert"></p><footer class="dialog-actions"><button class="cancel-button" type="button" id="cancel-editor">Cancel</button><button class="primary-button" type="submit" id="save-car">Save listing</button></footer>
+    </form></dialog>
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    <script src="admin.js"></script>
+</body>
+</html>

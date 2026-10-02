@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#183c31">
+    <meta name="description" content="Find your next car with AutoList. Compare trusted local listings, save favorites, and shop with confidence.">
+    <title>AutoList — Find your next car</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="site-header">
+        <a class="brand" href="#top" aria-label="AutoList home"><span class="brand-mark" aria-hidden="true">A</span><span>auto<span class="brand-light">list</span></span></a>
+        <nav class="main-nav" aria-label="Main navigation">
+            <a class="nav-link active" href="#inventory">Find a car</a>
+            <a class="nav-link" href="#how-it-works">How it works</a>
+        </nav>
+        <div class="header-actions">
+            <button class="saved-nav" id="saved-nav" type="button" aria-label="Show saved cars">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.8 8.7c0 4.1-8.8 10.3-8.8 10.3S3.2 12.8 3.2 8.7a4.5 4.5 0 0 1 8.8-1.2 4.5 4.5 0 0 1 8.8 1.2Z"/></svg>
+                <span>Saved</span><span class="saved-count" id="saved-count">0</span>
+            </button>
+            <a class="sell-link" href="/admin">List a car <span aria-hidden="true">↗</span></a>
+        </div>
+        <button class="mobile-menu" type="button" aria-label="Open saved cars" id="mobile-saved"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.8 8.7c0 4.1-8.8 10.3-8.8 10.3S3.2 12.8 3.2 8.7a4.5 4.5 0 0 1 8.8-1.2 4.5 4.5 0 0 1 8.8 1.2Z"/></svg><span id="mobile-saved-count">0</span></button>
+    </header>
+
+    <main id="top">
+        <section class="hero" aria-labelledby="hero-title">
+            <div class="hero-inner">
+                <div class="hero-copy">
+                    <p class="eyebrow"><span></span> A better way to find your next car</p>
+                    <h1 id="hero-title">The right car<br>changes <em>everything.</em></h1>
+                    <p class="hero-subtitle">Good cars. Good people. No guesswork.</p>
+                </div>
+                <div class="hero-photo" role="img" aria-label="A silver sports car on a mountain road">
+                    <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1200&q=85" alt="Silver Porsche on a mountain road">
+                    <span class="photo-note"><span class="photo-dot"></span> Your next chapter starts here</span>
+                </div>
+                <form class="search-bar" id="search-form">
+                    <label class="search-field search-make">
+                        <span class="field-label">MAKE</span>
+                        <select id="make-select" aria-label="Select make">
+                            <option value="">Any make</option>
+                        </select>
+                    </label>
+                    <label class="search-field search-model">
+                        <span class="field-label">MODEL OR KEYWORD</span>
+                        <input id="keyword-input" type="search" placeholder="Try 'Camry' or 'hybrid'" autocomplete="off">
+                    </label>
+                    <label class="search-field search-price">
+                        <span class="field-label">MAX PRICE</span>
+                        <select id="price-select" aria-label="Maximum price">
+                            <option value="">Any price</option>
+                            <option value="20000">$20,000</option>
+                            <option value="30000">$30,000</option>
+                            <option value="40000">$40,000</option>
+                            <option value="50000">$50,000</option>
+                        </select>
+                    </label>
+                    <button class="search-submit" type="submit"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.3"/><path d="m16 16 4.3 4.3"/></svg><span>Search cars</span></button>
+                </form>
+            </div>
+        </section>
+
+        <section class="inventory-section" id="inventory" aria-labelledby="inventory-heading">
+            <div class="inventory-heading-row">
+                <div>
+                    <p class="section-kicker">YOUR NEXT CAR IS CLOSER</p>
+                    <h2 id="inventory-heading">Cars worth a closer look<span class="heading-period">.</span></h2>
+                </div>
+                <div class="inventory-tools">
+                    <button class="filter-toggle" id="filter-toggle" type="button" aria-expanded="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M7 12h10m-7 5h4"/><circle cx="8" cy="7" r="1.5"/><circle cx="15" cy="12" r="1.5"/><circle cx="12" cy="17" r="1.5"/></svg>Filters <span id="filter-count" class="filter-count" hidden>0</span></button>
+                    <label class="sort-control"><span>Sort by</span><select id="sort-select" aria-label="Sort listings"><option value="recommended">Recommended</option><option value="price-low">Price: low to high</option><option value="price-high">Price: high to low</option><option value="year-new">Newest year</option><option value="mileage-low">Lowest mileage</option></select></label>
+                </div>
+            </div>
+            <div class="inventory-layout">
+                <aside class="filters" id="filters-panel" aria-label="Filter vehicles">
+                    <div class="filters-title-row"><h3>Refine results</h3><button type="button" id="clear-filters" class="clear-filters">Clear all</button></div>
+                    <fieldset class="filter-group"><legend>Body style</legend><div class="body-options" id="body-options"></div></fieldset>
+                    <fieldset class="filter-group">
+                        <legend>Price range</legend>
+                        <div class="range-inputs"><label><span>$ Min</span><input id="min-price" type="number" inputmode="numeric" min="0" placeholder="Any"></label><span class="range-dash">—</span><label><span>$ Max</span><input id="max-price" type="number" inputmode="numeric" min="0" placeholder="Any"></label></div>
+                    </fieldset>
+                    <fieldset class="filter-group">
+                        <legend>Maximum mileage</legend>
+                        <label class="select-wrap"><select id="mileage-select" aria-label="Maximum mileage"><option value="">Any mileage</option><option value="25000">Under 25,000 mi</option><option value="50000">Under 50,000 mi</option><option value="75000">Under 75,000 mi</option><option value="100000">Under 100,000 mi</option></select></label>
+                    </fieldset>
+                    <fieldset class="filter-group">
+                        <legend>Fuel type</legend>
+                        <div class="check-list" id="fuel-options"></div>
+                    </fieldset>
+                    <div class="filter-footer"><span class="verified-mark">✓</span><span>Every listing is reviewed before it reaches you.</span></div>
+                </aside>
+                <div class="results-area">
+                    <div class="results-meta"><p id="results-count" aria-live="polite">Loading cars...</p><button class="mobile-clear" type="button" id="mobile-clear">Clear filters</button></div>
+                    <div class="vehicle-grid" id="vehicle-grid"></div>
+                    <div class="empty-state" id="empty-state" hidden><span class="empty-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.3"/><path d="m16 16 4.3 4.3"/></svg></span><h3>No cars found this time.</h3><p>Try widening your filters and take another look.</p><button type="button" id="empty-clear">Clear all filters</button></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="sell-band" id="sell">
+            <div class="sell-inner"><div><p class="section-kicker">MADE FOR REAL PEOPLE</p><h2>Selling your car?<br><em>Put it in the right hands.</em></h2></div><a class="sell-cta" href="/admin">Add a listing <span aria-hidden="true">↗</span></a></div>
+        </section>
+        <section class="trust-strip" id="how-it-works" aria-label="How AutoList works"><div><span class="trust-number">01</span><strong>Real cars</strong><span>Listings checked by our team.</span></div><div><span class="trust-number">02</span><strong>Clear details</strong><span>Know what you're looking at.</span></div><div><span class="trust-number">03</span><strong>Your call</strong><span>Talk to the seller, your way.</span></div></section>
+    </main>
+    <footer class="site-footer"><a class="brand footer-brand" href="#top"><span class="brand-mark" aria-hidden="true">A</span><span>auto<span class="brand-light">list</span></span></a><span>Good roads ahead. © 2026 AutoList</span><a href="/admin">Admin <span aria-hidden="true">↗</span></a></footer>
+
+    <dialog class="vehicle-dialog" id="vehicle-dialog" aria-labelledby="dialog-title"><button class="dialog-close" type="button" id="dialog-close" aria-label="Close details">×</button><div id="dialog-content"></div></dialog>
+    <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,16 @@
+{
+  "name": "autolist-marketplace",
+  "version": "1.0.0",
+  "private": true,
+  "description": "AutoList vehicle marketplace and inventory manager",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "18": "^0.0.0",
+    "node": "^22.23.3"
+  }
+}
